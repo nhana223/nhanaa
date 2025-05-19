@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Trình chiếu 6 hình ảnh toàn màn hình</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .image-container {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .image-container div {
+      flex: 1;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+<div class="image-container" id="imageContainer"></div>
+
+<script>
+  const images = [
+    { src: "https://i.ibb.co/5g96C4Xy/Create-an-image-cont.png", link: "https://sites.google.com/vnkgu.edu.vn/goldentime/sản-phẩm?authuser=0" },
+    { src: "https://i.ibb.co/d4GFW0tM/v-n-chuy-n.png", link: "https://sites.google.com/vnkgu.edu.vn/goldentime/sản-phẩm?authuser=0" },
+    { src: "https://i.ibb.co/d4s6B24d/casio.png", link: "https://sites.google.com/vnkgu.edu.vn/goldentime/sản-phẩm/casio?authuser=0" },
+    { src: "https://i.ibb.co/MD5YxgKn/xiaomi.png", link: "https://sites.google.com/vnkgu.edu.vn/goldentime/sản-phẩm/xiaomi?authuser=0" },
+    { src: "https://i.ibb.co/HLhXZNcV/seiko.png", link: "https://sites.google.com/vnkgu.edu.vn/goldentime/sản-phẩm/seiko?authuser=0" },
+    { src: "https://i.ibb.co/DgfMR1Lc/omega.png", link: "https://sites.google.com/vnkgu.edu.vn/goldentime/sản-phẩm/omega?authuser=0" }
+  ];
+
+  const container = document.getElementById('imageContainer');
+  let currentIndex = 0;
+
+  function showImages() {
+    container.innerHTML = '';
+
+    for (let i = 0; i < 2; i++) {
+      const imgIndex = (currentIndex + i) % images.length;
+      const div = document.createElement('div');
+      const redirectUrl = "redirect.html?url=" + encodeURIComponent(images[imgIndex].link);
+
+      div.onclick = () => {
+        window.location.href = redirectUrl;
+      };
+
+      const img = document.createElement('img');
+      img.src = images[imgIndex].src;
+      img.alt = `Hình ${imgIndex + 1}`;
+
+      div.appendChild(img);
+      container.appendChild(div);
+    }
+
+    currentIndex = (currentIndex + 2) % images.length;
+  }
+
+  showImages();
+  setInterval(showImages, 5000);
+</script>
+
+</body>
+</html>
