@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Đang chuyển hướng...</title>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const url = params.get("url");
+    if (url) {
+      window.location.href = decodeURIComponent(url);
+    } else {
+      document.body.innerHTML = "<p>Lỗi: Không tìm thấy URL để chuyển hướng.</p>";
+    }
+  </script>
+</head>
+<body>
+  <p>Đang chuyển hướng, vui lòng chờ...</p>
+</body>
+</html>
